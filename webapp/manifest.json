@@ -1,0 +1,191 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "testprj",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.12.1",
+            "toolsId": "4d260b85-f3f0-4bb4-b282-5556c8893438"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/YSB_VIS_AG_RATES/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "mainService_Annotation"
+                    ],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "FilterDataJSON": {
+                "type": "JSON",
+                "uri": "model/FiltersData.json"
+            },
+            "YVIS_AGGREMENT_RATES_SRV": {
+                "uri": "/sap/opu/odata/sap/YVIS_AGGREMENT_RATES_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/YVIS_AGGREMENT_RATES_SRV/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "mainService_Annotation": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='YSB_VIS_AG_RATES_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/mainService/mainService_Annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "fullWidth": true,
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.120.8",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": false
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "testprj.i18n.i18n"
+                }
+            },
+            "FilterDataModel": {
+                "dataSource": "FilterDataJSON",
+                "type": "sap.ui.model.json.JSONModel"
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "useBatch": true
+                }
+            },
+            "YVIS_AGGREMENT_RATES_SRV": {
+                "dataSource": "YVIS_AGGREMENT_RATES_SRV",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    },
+                    "tableSettings": {
+                        "multiSelect": true
+                    }
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "testprj.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "Routetest",
+                    "pattern": ":?query:",
+                    "target": [
+                        "Targettest"
+                    ]
+                },
+                {
+                    "name": "MaterialTable",
+                    "pattern": "MaterialTable",
+                    "target": [
+                        "TargetMaterialTable"
+                    ]
+                }
+            ],
+            "targets": {
+                "Targettest": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "test",
+                    "viewName": "test"
+                },
+                "TargetMaterialTable": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "MaterialTable",
+                    "viewName": "MaterialTable",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/YC_VIS_AG_RATES",
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "selectionMode":"Multi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "testprj.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

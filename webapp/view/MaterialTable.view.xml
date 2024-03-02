@@ -1,0 +1,120 @@
+<mvc:View
+    xmlns:core="sap.ui.core"
+    xmlns:table2="sap.ui.table"
+    xmlns:table="sap.ui.mdc.table"
+    xmlns:plugins="sap.m.plugins"
+    xmlns:f="sap.f"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    controllerName="testprj.controller.MaterialTable"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:C="sap.m.plugins"
+    displayBlock="true"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns="sap.m"
+>
+    <Page
+        busy="{FilterDataModel>/MaterialBtns/Page}"
+        id="page"
+        showHeader="false"
+    >
+        <content>
+            <smarttable:SmartTable
+                renderType="Div"
+                id="SmartTable"
+                busy="{FilterDataModel>/MaterialBtns/Table}"
+                entitySet="YC_VIS_AG_RATES"
+                smartFilterId="SmartfilterBar"
+                tableType="Table"
+                beforeRebindTable="onBeforeRebindTable"
+                enableExport="true"
+                beforeExport="onBeforeExport"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="Materials"
+                editable="false"
+                afterVariantApply="onAfterVariantApply"
+                showPasteButton="true"
+                showRowCount="true"
+                editToggled="onEditorDisplay"
+                persistencyKey="SmartTableAnalytical_Explored"
+                enableAutoBinding="true"
+                beforePaste="onBeforePaste"
+                class="sapUiResponsiveContentPadding"
+                enableAutoColumnWidth="true"
+                editTogglable="true"
+                fieldChange="onFieldChange"
+                enablePaste="true"
+                paste="onPaste"
+                initiallyVisibleFields="agreement,customer,validto,validfrom,price,Product,priceunit"
+                app:useSmartToggle="true"
+                tableBindingPath="oMaterialModel>/"
+                initialise="onInitialise"
+            >
+                <!-- <f:FlexibleColumnLayout >
+                <f:layoutData>
+                    <FlexItemData baseSize="0%"></FlexItemData>
+                </f:layoutData>
+                
+            </f:FlexibleColumnLayout> -->
+                <smarttable:copyProvider>
+                    <plugins:CopyProvider
+                        copySparse="true"
+                        copyPreference="Full"
+                        visible="{oMaterialbtns>/Visible}"
+                    />
+                </smarttable:copyProvider>
+                <smarttable:dependents>
+                    <C:CellSelector  rangeLimit="200" />
+                </smarttable:dependents>
+
+                <smarttable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Add"
+                            enabled="{oMaterialbtns>/Visible}"
+                            press="onAdd"
+                        />
+                        <Button
+                            text="Delete"
+                            enabled="{oMaterialbtns>/Visible}"
+                            press="onDelete"
+                        />
+                    </OverflowToolbar>
+                </smarttable:customToolbar>
+                <!-- <Table >
+                    <columns>
+                        <Column width="5rem">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "product", "leadingProperty": "product", "columnIndex": 1}'></core:CustomData>
+                            </customData>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem >
+                            <Input enabled="false" value=""></Input>
+                        </ColumnListItem>
+                    </items>
+                </Table> -->
+            </smarttable:SmartTable>
+        </content>
+        <footer>
+            <Bar>
+                <contentRight>
+                    <Button
+                        text="Save"
+                        enabled="{FilterDataModel>/MaterialBtns/BtnEnable}"
+                        busyIndicatorSize="Small"
+                        press="onSave"
+                    />
+                    <Button
+                        text="Discard"
+                        enabled="{FilterDataModel>/MaterialBtns/BtnEnable}"
+                        press="onDiscard"
+                        busyIndicatorSize="Small"
+                    />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

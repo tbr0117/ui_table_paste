@@ -1,0 +1,41 @@
+<mvc:View
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+    xmlns:macros="sap.fe.macros"
+    xmlns:form="sap.ui.layout.form"
+    controllerName="testprj.controller.test"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+    <Page
+        id="page"
+        showHeader="false"
+    >
+        <content>
+            <smartfilterbar:SmartFilterBar id="SmartfilterBar"
+                entitySet="YC_VIS_AG_RATES" 
+                showGoOnFB="false" filterChange="onFilterChange"
+                advancedMode="true"
+            />
+        
+        </content>
+        <footer>
+            <Bar>
+                <contentRight>
+                    <Button
+                        text="Go"
+                        enabled="{MaterialData>/MaterialBtns/Execute}"
+                        press="onGo"
+                    />
+                </contentRight>
+            </Bar>
+
+            <!-- <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Execute" />
+            </Toolbar> -->
+        </footer>
+    </Page>
+</mvc:View>
